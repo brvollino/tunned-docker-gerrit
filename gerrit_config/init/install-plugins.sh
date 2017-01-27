@@ -1,0 +1,1 @@
+cp /gerrit_config/plugins/*.jar $GERRIT_SITE/plugins/

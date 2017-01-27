@@ -1,0 +1,29 @@
+version: '2'
+services:  
+  gerrit:
+    container_name: gerrit
+    build:
+      context: .
+    image: vollino/gerrit
+    ports:
+      - 8501:8080
+      - 29418:29418
+    volumes:
+      - /docker/containers/gerrit/review_site:/var/gerrit/review_site
+    networks: 
+      - ewok
+    environment:
+      DATABASE_TYPE: postgresql
+      DB_ENV_POSTGRES_USER: gerrit2
+      DB_ENV_POSTGRES_PASSWORD: gerritPassword
+      DB_ENV_POSTGRES_DB: reviewdb
+      DB_PORT_5432_TCP_ADDR: gerrit-postgres
+      DB_PORT_5432_TCP_PORT: 5432
+      WEBURL: http://localhost:8501
+      GERRIT_INIT_ARGS: --install-plugin=download-commands --install-plugin=hooks --install-plugin=replication 
+      AUTH_TYPE: OAUTH
+      OAUTH_GITHUB_CLIENT_ID: clientId
+      OAUTH_GITHUB_CLIENT_SECRET: clientSecret
+
+networks:
+  ewok:
