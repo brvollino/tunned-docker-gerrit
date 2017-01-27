@@ -1,4 +1,4 @@
-FROM vollino/gerrit
+FROM openfrontier/gerrit
 
 ADD gerrit_config/ /gerrit_config
 
